@@ -159,10 +159,10 @@ export default function TrendingPage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2 flex items-center">
-            <TrendingUp className="w-8 h-8 mr-3 text-primary" />
+            <TrendingUp className="w-8 h-8 mr-3 text-purple-600" />
             トレンド
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-gray-600">
             今最も注目されている配信者と商品をチェック
           </p>
         </div>
