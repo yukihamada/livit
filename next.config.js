@@ -1,16 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Docker本番ビルド用設定
-  output: 'standalone',
+  reactStrictMode: true,
+  swcMinify: true,
   
   images: {
-    domains: ['via.placeholder.com', 'localhost', 'livitnow.app', 'livitnow.jp'],
-    unoptimized: false,
+    domains: [
+      'images.unsplash.com',
+      'rmjjqanzhlitfwqwbvrm.supabase.co',
+      'via.placeholder.com',
+      'localhost'
+    ],
+    unoptimized: true,
   },
   
-  // 本番最適化設定
+  // Experimental features for Supabase
   experimental: {
-    // optimizeCss: true, // ビルドエラーを避けるため一時無効化
+    serverComponentsExternalPackages: ['@supabase/supabase-js'],
   },
   
   // セキュリティヘッダー設定
@@ -31,21 +36,22 @@ const nextConfig = {
             key: 'Referrer-Policy',
             value: 'origin-when-cross-origin',
           },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=*, microphone=*, geolocation=self',
+          },
         ],
       },
     ];
   },
   
-  // WebRTC用設定
+  // WebRTC and media files configuration
   webpack: (config) => {
     config.module.rules.push({
       test: /\.(mp4|webm|ogg|swf|ogv)$/,
-      use: {
-        loader: 'file-loader',
-        options: {
-          publicPath: '/_next/static/videos/',
-          outputPath: 'static/videos/',
-        },
+      type: 'asset/resource',
+      generator: {
+        filename: 'static/media/[name].[hash][ext]',
       },
     });
     return config;
