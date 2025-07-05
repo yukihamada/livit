@@ -4,12 +4,6 @@
   "outputDirectory": ".next",
   "installCommand": "npm install",
   "framework": "nextjs",
-  "functions": {
-    "app/**/*.tsx": {
-      "runtime": "nodejs18.x",
-      "maxDuration": 30
-    }
-  },
   "headers": [
     {
       "source": "/(.*)",
